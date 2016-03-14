@@ -250,6 +250,23 @@ begin
   --dir_red
   --dir_green
   --dir_blue
+		dir_red<=
+			x"00" when dir_pixel_column <= x"50" else -- white  
+			x"ff" when dir_pixel_column <= 80 and dir_pixe_column < 160 else -- yellow
+			x"00" when dir_pixel_column <= 160  and dir_pixel_column < 240 else --cyan 
+			x"00" when dir_pixel_column <= 240 and dir_pixel_column < 320 else -- green
+			x"ff" when dir_pixel_column <= 320 and dir_pixe_column < 400 else --purple
+			x"00" when dir_pixel_column <= 400 and dir_pixel_column < 480 else --red
+			x"ff" when dir_pixel_column <= 480 and dir_pixe_column < 560 else --blue
+			x"00" when dir_pixel_column <= 560 and dir_pixel_column < 640  else -- black
+			x"00" ;
+			
+			
+		
+	
+		
+				
+	
  
   -- koristeci signale realizovati logiku koja pise po TXT_MEM
   --char_address
