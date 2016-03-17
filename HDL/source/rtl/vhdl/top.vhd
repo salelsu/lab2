@@ -251,27 +251,53 @@ begin
   --dir_green
   --dir_blue
 		dir_red<=
-			x"00" when dir_pixel_column <= x"50" else -- white  
-			x"ff" when dir_pixel_column <= 80 and dir_pixe_column < 160 else -- yellow
-			x"00" when dir_pixel_column <= 160  and dir_pixel_column < 240 else --cyan 
-			x"00" when dir_pixel_column <= 240 and dir_pixel_column < 320 else -- green
-			x"ff" when dir_pixel_column <= 320 and dir_pixe_column < 400 else --purple
-			x"00" when dir_pixel_column <= 400 and dir_pixel_column < 480 else --red
-			x"ff" when dir_pixel_column <= 480 and dir_pixe_column < 560 else --blue
-			x"00" when dir_pixel_column <= 560 and dir_pixel_column < 640  else -- black
+			x"ff" when dir_pixel_column <= 0 and dir_pixe_column < 80  and dir_pixel_row <=0 and dir_pixel_row < 60 else -- white  
+			x"ff" when dir_pixel_column <= 80 and dir_pixe_column < 160 and dir_pixel_row <=60 and dir_pixel_row < 120  else -- yellow
+			x"00" when dir_pixel_column <= 160  and dir_pixel_column < 240 and dir_pixel_row <=120 and dir_pixel_row < 180    else --cyan 
+			x"00" when dir_pixel_column <= 240 and dir_pixel_column < 320 and dir_pixel_row <=180 and dir_pixel_row < 240 else -- green
+			x"ff" when dir_pixel_column <= 320 and dir_pixe_column < 400 and dir_pixel_row <=240 and dir_pixel_row < 300 else --magenta
+			x"ff" when dir_pixel_column <= 400 and dir_pixel_column < 480 and dir_pixel_row <=300 and dir_pixel_row < 360  else --red
+			x"00" when dir_pixel_column <= 480 and dir_pixe_column < 560 and dir_pixel_row <=360 and dir_pixel_row < 420 else --blue
+			x"00" when dir_pixel_column <= 560 and dir_pixel_column < 640 and dir_pixel_row <=420 and dir_pixel_row < 480  else -- black
+			x"00" ;
+			
+		dir_green<=
+			x"ff" when dir_pixel_column <= 0 and dir_pixe_column < 80  and dir_pixel_row <=0 and dir_pixel_row < 60 else -- white  
+			x"ff" when dir_pixel_column <= 80 and dir_pixe_column < 160 and dir_pixel_row <=60 and dir_pixel_row < 120  else -- yellow
+			x"ff" when dir_pixel_column <= 160  and dir_pixel_column < 240 and dir_pixel_row <=120 and dir_pixel_row < 180 else --cyan 
+			x"80" when dir_pixel_column <= 240 and dir_pixel_column < 320  and dir_pixel_row <=180 and dir_pixel_row < 240 else -- green
+			x"00" when dir_pixel_column <= 320 and dir_pixe_column < 400 and dir_pixel_row <=240 and dir_pixel_row < 300 else --magenta
+			x"00" when dir_pixel_column <= 400 and dir_pixel_column < 480 and dir_pixel_row <=300 and dir_pixel_row < 360 else --red
+			x"00" when dir_pixel_column <= 480 and dir_pixe_column < 560 and dir_pixel_row <=360 and dir_pixel_row < 420 else --blue
+			x"00" when dir_pixel_column <= 560 and dir_pixel_column < 640 and dir_pixel_row <=420 and dir_pixel_row < 480  else -- black
+			x"00" ;
+			
+		dir_blue<=
+			x"ff" when dir_pixel_column <= 0 and dir_pixe_column < 80  and dir_pixel_row <=0 and dir_pixel_row < 60 else -- white  
+			x"00" when dir_pixel_column <= 80 and dir_pixe_column < 160 and dir_pixel_row <=60 and dir_pixel_row < 120  else -- yellow
+			x"ff" when dir_pixel_column <= 160  and dir_pixel_column < 240 and dir_pixel_row <=120 and dir_pixel_row < 180 else --cyan 
+			x"00" when dir_pixel_column <= 240 and dir_pixel_column < 320 and dir_pixel_row <=180 and dir_pixel_row < 240 else -- green
+			x"ff" when dir_pixel_column <= 320 and dir_pixe_column < 400 and dir_pixel_row <=240 and dir_pixel_row < 300 else --magenta
+			x"00" when dir_pixel_column <= 400 and dir_pixel_column < 480 and dir_pixel_row <=300 and dir_pixel_row < 360 else--red
+			x"ff" when dir_pixel_column <= 480 and dir_pixe_column < 560 and dir_pixel_row <=360 and dir_pixel_row < 420 else --blue
+			x"00" when dir_pixel_column <= 560 and dir_pixel_column < 640  and dir_pixel_row <=420 and dir_pixel_row < 480  else -- black
 			x"00" ;
 			
 			
-		
-	
-		
-				
-	
  
   -- koristeci signale realizovati logiku koja pise po TXT_MEM
   --char_address
   --char_value
   --char_we
+  
+	char_address<=
+	x"00000013" when char_we<='1' and char_value<="000001" else
+	x"00000006" when char_we<='1' and char_value<="000010" else
+	x"00000001" when char_we<='1' and char_value<="000100" else
+	x"00000005" when char_we<='1' and char_value<="001000" else
+	x"00000000";
+	
+	
   
   -- koristeci signale realizovati logiku koja pise po GRAPH_MEM
   --pixel_address
